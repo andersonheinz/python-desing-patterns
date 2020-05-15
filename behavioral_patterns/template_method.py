@@ -3,8 +3,10 @@
 Diferentes algoritimos com estruturas parecidas
 Cada classe com sua responsabilidade separada
 A classe mãe controla os filhos.
-Os filhos preenchem apenas as lacunas da mãe, aquele métodos abstratos, mas a classe mãe está no poder e chama estes métodos dos filhos.
-Esse fato que filhos não ficam mais no controle da execução também é chamado de The Hollywood Principle.
+Os filhos preenchem apenas as lacunas da mãe, aquele métodos abstratos, mas a
+classe mãe está no poder e chama estes métodos dos filhos.
+Esse fato que filhos não ficam mais no controle da execução também é chamado de
+The Hollywood Principle.
 
 """
 
@@ -13,7 +15,7 @@ from Item import Item
 from Orcamento import Orcamento
 
 
-class Template_de_imposto_condicional(object):
+class TemplateDeImpostoCondicional(object):
     __metaclass__ = ABCMeta
 
     def calcula(self, orcamento):
@@ -36,8 +38,7 @@ class Template_de_imposto_condicional(object):
         pass
 
 
-class ICPP(Template_de_imposto_condicional):
-
+class ICPP(TemplateDeImpostoCondicional):
     def deve_usar_maxima_taxacao(self, orcamento):
         return orcamento.valor > 500
 
@@ -48,11 +49,13 @@ class ICPP(Template_de_imposto_condicional):
         return orcamento.valor * 0.05
 
 
-class IKCV(Template_de_imposto_condicional):
-
+class IKCV(TemplateDeImpostoCondicional):
     def deve_usar_maxima_taxacao(self, orcamento):
 
-        return orcamento.valor > 500 and self.__tem_item_maior_que_100_reais(orcamento)
+        return(
+            orcamento.valor > 500 and
+            self.__tem_item_maior_que_100_reais(orcamento)
+        )
 
     def maxima_taxacao(self, orcamento):
         return orcamento.valor * 0.1
@@ -69,7 +72,6 @@ class IKCV(Template_de_imposto_condicional):
 
 
 class Calculador_de_impostos(object):
-
     def realiza_calculo(self, orcamento, imposto):
         imposto_calculado = imposto.calcula(orcamento)
 

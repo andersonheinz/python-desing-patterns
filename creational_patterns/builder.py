@@ -1,18 +1,18 @@
 """
 
 # Builder
-Utilizar quando o objeto for complexo e com logica complicada, porem pode ser resolvido com parametros nomeados,
+Utilizar quando o objeto for complexo e com logica complicada, porem pode ser
+resolvido com parametros nomeados,
 conforme arquivo builder_simulacao.py
 
 """
 
 from datetime import date
-from Item import Item
-from Nota_fiscal import Nota_fiscal
+from item import Item
+from nota_fiscal import NotaFiscal
 
 
-class Criador_de_nota_fiscal(object):
-
+class CriadorDeNotaFiscal(object):
     def __init__(self):
 
         self.__razao_social = None
@@ -54,15 +54,18 @@ class Criador_de_nota_fiscal(object):
         if self.__detalhes is None:
             self.__detalhes = ''
 
-        return Nota_fiscal(razao_social=self.__razao_social,
-                           cnpj=self.__cnpj, data_de_emissao=self.__data_de_emissao,
-                           itens=self.__itens, detalhes=self.__detalhes
-                           )
+        return NotaFiscal(
+            razao_social=self.__razao_social,
+            cnpj=self.__cnpj,
+            data_de_emissao=self.__data_de_emissao,
+            itens=self.__itens,
+            detalhes=self.__detalhes
+        )
 
 
 if __name__ == '__main__':
 
-    itens=[
+    itens = [
         Item(
             'ITEM A',
             100
@@ -73,12 +76,12 @@ if __name__ == '__main__':
         )
     ]
 
-    nota_fiscal_criada_com_builder = (Criador_de_nota_fiscal()
-                                    .com_razao_social('FHSA Limitada')
-                                    .com_cnpj('012345678901234')
-                                    .com_itens(itens)
-                                    .constroi())
+    nota_fiscal_criada_com_builder = (
+        CriadorDeNotaFiscal()
+        .com_razao_social('FHSA Limitada')
+        .com_cnpj('012345678901234')
+        .com_itens(itens)
+        .constroi()
+    )
 
     print(nota_fiscal_criada_com_builder)
-
-

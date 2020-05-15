@@ -87,7 +87,7 @@ if __name__ == '__main__':
     contrato.avanca()
     historico.adiciona_estado(contrato.salva_estado())
 
-    contrato.cliente='Anderson'
+    contrato.cliente = 'Anderson'
 
     print(contrato.tipo)
     print(contrato.cliente)

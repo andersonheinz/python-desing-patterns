@@ -3,14 +3,14 @@ Utilizando parametros nomeados para obter o mesmo efeito do builder
 
 """
 
-from datetime import date
-from Item import Item
-from Nota_fiscal import Nota_fiscal
+
+from item import Item
+from nota_fiscal import NotaFiscal
 
 
 if __name__ == '__main__':
 
-    itens=[
+    itens = [
         Item(
             'ITEM A',
             100
@@ -21,7 +21,7 @@ if __name__ == '__main__':
         )
     ]
 
-    nota_fiscal = Nota_fiscal(
+    nota_fiscal = NotaFiscal(
         cnpj='012345678901234',
         razao_social='FHSA Limitada',
         itens=itens

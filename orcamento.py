@@ -1,5 +1,4 @@
 class Orcamento(object):
-
     def __init__(self):
         self.__itens = []
 
@@ -7,7 +6,7 @@ class Orcamento(object):
     def valor(self):
         total = 0.0
         for item in self.__itens:
-            total+= item.valor
+            total += item.valor
         return total
 
     def obter_itens(self):

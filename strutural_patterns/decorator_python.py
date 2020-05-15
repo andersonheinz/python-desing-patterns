@@ -1,13 +1,15 @@
 """
-O exemplo abaixo e um recurso padrao da linguagem, o designer pattern decorator aplica o mesmo conceito na OO, porem
-com mais flexibilidade.
+O exemplo abaixo e um recurso padrao da linguagem, o designer pattern decorator
+aplica o mesmo conceito na OO, porem com mais flexibilidade.
 
 """
+
 
 def TDA(metodo_ou_funcao):
     def wrapper(*args, **kwargs):
         return metodo_ou_funcao(*args, **kwargs) + 20.0
     return wrapper
+
 
 def TDE(metodo_ou_funcao):
     def wrapper(*args, **kwargs):

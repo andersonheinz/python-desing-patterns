@@ -1,6 +1,8 @@
 """
 # Observer
-Quando o acoplamento da nossa classe está crescendo, ou quando temos diversas ações diferentes a serem executadas após um determinado processo. Nestes casos, podemos implementar o Observer.
+Quando o acoplamento da nossa classe está crescendo, ou quando temos diversas
+ações diferentes a serem executadas após um determinado processo. Nestes casos,
+podemos implementar o Observer.
 
 """
 
@@ -20,8 +22,15 @@ def imprime(nota_fiscal):
     print('imprimindo ...')
 
 
-class Nota_fiscal(object):
-    def __init__(self, razao_social, cnpj, itens, data_de_emissao=date.today(), detalhes='', observadores=[]):
+class NotaFiscal(object):
+    def __init__(
+            self,
+            razao_social,
+            cnpj,
+            itens,
+            data_de_emissao=date.today(),
+            detalhes='',
+            observadores=[]):
         self.__razao_social = razao_social
         self.__cnpj = cnpj
         self.__data_de_emissao = data_de_emissao
@@ -52,7 +61,7 @@ class Nota_fiscal(object):
 
 if __name__ == '__main__':
 
-    itens=[
+    itens = [
         Item(
             nome='ITEM A',
             valor=100
@@ -63,12 +72,9 @@ if __name__ == '__main__':
         )
     ]
 
-    nota_fiscal = Nota_fiscal(
+    nota_fiscal = NotaFiscal(
         cnpj='012345678901234',
         razao_social='FHSA Limitada',
         itens=itens,
-        observadores=[envia_por_email,
-            salva_no_banco, imprime]
+        observadores=[envia_por_email, salva_no_banco, imprime]
     )
-
-

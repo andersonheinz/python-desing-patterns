@@ -2,8 +2,9 @@
 # State
 
 Necessidade de implementação de uma máquina de estados.
-Auxilia a manter o controle dos estados simples e organizados, através da criação de classes que representem cada estado
-e sabendo controlar as transições entre eles.
+Auxilia a manter o controle dos estados simples e organizados, através da
+criação de classes que representem cada estado e sabendo controlar as
+transições entre eles.
 
 """
 
@@ -11,7 +12,7 @@ from abc import ABCMeta, abstractmethod
 from Item import Item
 
 
-class Estado_de_um_orcamento(object):
+class EstadoDeUmOrcamento(object):
     __metaclass__ = ABCMeta
 
     @abstractmethod
@@ -31,7 +32,7 @@ class Estado_de_um_orcamento(object):
         pass
 
 
-class Em_aprovacao(Estado_de_um_orcamento):
+class EmAprovacao(EstadoDeUmOrcamento):
 
     def aplica_desconto_extra(self, orcamento):
         orcamento.adiciona_desconto_extra(orcamento.valor * 0.02)
@@ -46,7 +47,7 @@ class Em_aprovacao(Estado_de_um_orcamento):
         raise Exception('Orçamento em aprovação não podem ir para finalizado')
 
 
-class Aprovado(Estado_de_um_orcamento):
+class Aprovado(EstadoDeUmOrcamento):
 
     def aplica_desconto_extra(self, orcamento):
         orcamento.adiciona_desconto_extra(orcamento.valor * 0.05)
@@ -62,7 +63,7 @@ class Aprovado(Estado_de_um_orcamento):
         orcamento.estado_atual = Finalizado()
 
 
-class Reprovado(Estado_de_um_orcamento):
+class Reprovado(EstadoDeUmOrcamento):
 
     def aplica_desconto_extra(self, orcamento):
         raise Exception('Orçamentos reprovados não receberam desconto extra')
@@ -77,26 +78,30 @@ class Reprovado(Estado_de_um_orcamento):
         orcamento.estado = Finalizado()
 
 
-class Finalizado(Estado_de_um_orcamento):
+class Finalizado(EstadoDeUmOrcamento):
 
     def aplica_desconto_extra(self, orcamento):
         raise Exception('Orçamentos finalizados não receberam desconto extra')
 
     def aprova(self, orcamento):
-        raise Exception('Orçamentos finalizados não podem ser aprovados novamente')
+        raise Exception(
+            'Orçamentos finalizados não podem ser aprovados novamente'
+        )
 
     def reprova(self, orcamento):
         raise Exception('Orçamentos finalizados não podem ser reprovados')
 
     def finaliza(self, orcamento):
-        raise Exception('Orçamentos finalizados não podem ser finalizados novamente')
+        raise Exception(
+            'Orçamentos finalizados não podem ser finalizados novamente'
+        )
 
 
 class Orcamento(object):
 
     def __init__(self):
         self.__itens = []
-        self.estado_atual = Em_aprovacao()
+        self.estado_atual = EmAprovacao()
         self.__desconto_extra = 0
 
     def aprova(self):
@@ -114,13 +119,13 @@ class Orcamento(object):
 
     def adiciona_desconto_extra(self, desconto):
 
-        self.__desconto_extra+= desconto
+        self.__desconto_extra += desconto
 
     @property
     def valor(self):
         total = 0.0
         for item in self.__itens:
-            total+= item.valor
+            total += item.valor
         return total - self.__desconto_extra
 
     def obter_itens(self):

@@ -9,15 +9,15 @@ ele pertence.
 
 from datetime import date
 from abc import ABCMeta, abstractmethod
+from typing import Union, List
 
 
 class Pedido(object):
-
     def __init__(self, cliente: str, valor: float) -> None:
         self.__cliente = cliente
         self.__valor = valor
         self.__status = 'NOVO'
-        self.__data_finalizacao = None
+        self.__data_finalizacao: Union[date, None] = None
 
     def paga(self) -> None:
         self.__status = 'PAGO'
@@ -39,14 +39,13 @@ class Pedido(object):
         return self.__status
 
     @property
-    def data_finalizacao(self) -> date:
+    def data_finalizacao(self) -> Union[date, None]:
         return self.__data_finalizacao
 
 
 class FilaDeTrabalho(object):
-
     def __init__(self) -> None:
-        self.__comandos = []
+        self.__comandos: List[Union[ConcluiPedido, PagaPedido]] = []
 
     def adiciona(self, comando) -> None:
         self.__comandos.append(comando)
@@ -65,7 +64,6 @@ class Comando(object):
 
 
 class ConcluiPedido(Comando):
-
     def __init__(self, pedido) -> None:
         self.__pedido = pedido
 
@@ -74,7 +72,6 @@ class ConcluiPedido(Comando):
 
 
 class PagaPedido(Comando):
-
     def __init__(self, pedido) -> None:
         self.__pedido = pedido
 

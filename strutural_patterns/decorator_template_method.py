@@ -10,7 +10,6 @@ from abc import ABCMeta, abstractmethod
 
 
 class Imposto(object):
-
     def __init__(self, outro_imposto=None):
         self.__outro_imposto = outro_imposto
 
@@ -26,15 +25,21 @@ class Imposto(object):
         pass
 
 
-class Template_de_imposto_condicional(Imposto):
+class TemplateDeImpostoCondicional(Imposto):
     __metaclass__ = ABCMeta
 
     def calcula(self, orcamento):
 
         if self.deve_usar_maxima_taxacao(orcamento):
-            return self.maxima_taxacao(orcamento) + self.calculo_do_outro_imposto(orcamento)
+            return (
+                self.maxima_taxacao(orcamento) +
+                self.calculo_do_outro_imposto(orcamento)
+            )
         else:
-            return self.minima_taxacao(orcamento) + self.calculo_do_outro_imposto(orcamento)
+            return (
+                self.minima_taxacao(orcamento) +
+                self.calculo_do_outro_imposto(orcamento)
+            )
 
     @abstractmethod
     def deve_usar_maxima_taxacao(self, orcamento):
@@ -49,8 +54,7 @@ class Template_de_imposto_condicional(Imposto):
         pass
 
 
-class ICPP(Template_de_imposto_condicional):
-
+class ICPP(TemplateDeImpostoCondicional):
     def deve_usar_maxima_taxacao(self, orcamento):
         return orcamento.valor > 500
 
@@ -61,11 +65,13 @@ class ICPP(Template_de_imposto_condicional):
         return orcamento.valor * 0.05
 
 
-class IKCV(Template_de_imposto_condicional):
-
+class IKCV(TemplateDeImpostoCondicional):
     def deve_usar_maxima_taxacao(self, orcamento):
 
-        return orcamento.valor > 500 and self.__tem_item_maior_que_100_reais(orcamento)
+        return (
+            orcamento.valor > 500 and
+            self.__tem_item_maior_que_100_reais(orcamento)
+        )
 
     def maxima_taxacao(self, orcamento):
         return orcamento.valor * 0.1
@@ -81,8 +87,7 @@ class IKCV(Template_de_imposto_condicional):
         return False
 
 
-class Calculador_de_impostos(object):
-
+class CalculadorDeImpostos(object):
     def realiza_calculo(self, orcamento, imposto):
         imposto_calculado = imposto.calcula(orcamento)
 
@@ -91,7 +96,7 @@ class Calculador_de_impostos(object):
 
 if __name__ == '__main__':
 
-    calculador = Calculador_de_impostos()
+    calculador = CalculadorDeImpostos()
 
     orcamento = Orcamento()
     orcamento.adiciona_item(Item('ITEM 1', 50))
@@ -100,4 +105,3 @@ if __name__ == '__main__':
 
     print('ICPP com IKCV')
     calculador.realiza_calculo(orcamento, ICPP(IKCV()))
-

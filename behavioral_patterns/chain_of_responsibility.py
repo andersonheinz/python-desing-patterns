@@ -1,8 +1,10 @@
 """
 # Chain of Responsibility
-E quebrado as responsabilidades em várias diferentes classes, e as unido como uma corrente.
-Utilizar quando temos uma lista de comandos a serem executados de acordo com algum cenário em específico, e sabemos
-também qual o próximo cenário que deve ser validado, caso o anterior não satisfaça a condição.
+E quebrado as responsabilidades em várias diferentes classes, e as unido como
+uma corrente.
+Utilizar quando temos uma lista de comandos a serem executados de acordo com
+algum cenário em específico, e sabemos também qual o próximo cenário que deve
+ser validado, caso o anterior não satisfaça a condição.
 
 """
 
@@ -10,9 +12,9 @@ from Item import Item
 from Orcamento import Orcamento
 
 
-class Desconto_por_cinco_itens(object):
+class DescontoPorCincoItens(object):
 
-    def __init__(self, proximo_desconto):
+    def __init__(self, proximo_desconto) -> None:
         self.__proximo_desconto = proximo_desconto
 
     def calcula(self, orcamento):
@@ -22,9 +24,9 @@ class Desconto_por_cinco_itens(object):
             return self.__proximo_desconto.calcula(orcamento)
 
 
-class Desconto_por_mais_de_quinhentos_reais(object):
+class DescontoPorMaisDeQuinhentosReais(object):
 
-    def __init__(self, proximo_desconto):
+    def __init__(self, proximo_desconto) -> None:
         self.__proximo_desconto = proximo_desconto
 
     def calcula(self, orcamento):
@@ -34,20 +36,17 @@ class Desconto_por_mais_de_quinhentos_reais(object):
             return self.__proximo_desconto.calcula(orcamento)
 
 
-class Sem_desconto(object):
+class SemDesconto(object):
 
     def calcula(self, orcamento):
         return 0
 
 
-class Calculador_de_descontos(object):
-
+class CalculadoraDeDescontos(object):
     def calcula(self, orcamento):
-        desconto = Desconto_por_cinco_itens(
-                   Desconto_por_mais_de_quinhentos_reais(
-                   Sem_desconto()
-                   )
-        ).calcula(orcamento)
+        desconto = (DescontoPorCincoItens(
+            DescontoPorMaisDeQuinhentosReais(
+                SemDesconto())).calcula(orcamento))
         return desconto
 
 
@@ -58,7 +57,7 @@ if __name__ == '__main__':
     orcamento.adiciona_item(Item('ITEM - 2', 50))
     orcamento.adiciona_item(Item('ITEM - 3', 400))
 
-    calculador = Calculador_de_descontos()
+    calculador = CalculadoraDeDescontos()
 
     desconto = calculador.calcula(orcamento)
 

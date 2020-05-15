@@ -1,9 +1,10 @@
 """
 # Strategy
 
-Temos conjunto de algoritmos similares, e precisamos alternar entre eles em diferentes pedaços da aplicação.
-Podemos usar o Duck Typing passando a instância dos objetos que representam nossos impostos como parâmetro no lugar de
-uma função.
+Temos conjunto de algoritmos similares, e precisamos alternar entre eles em
+diferentes pedaços da aplicação.
+Podemos usar o Duck Typing passando a instância dos objetos que representam
+nossos impostos como parâmetro no lugar de uma função.
 
 """
 
@@ -27,7 +28,7 @@ class ISS(object):
         return type(self).__name__
 
 
-class Calculadora_de_impostos(object):
+class CalculadoraDeImpostos(object):
     # Strategy
     def realiza_calculo(self, orcamento, imposto):
         # Duck Typing
@@ -37,7 +38,7 @@ class Calculadora_de_impostos(object):
 
 if __name__ == '__main__':
 
-    calculador = Calculadora_de_impostos()
+    calculador = CalculadoraDeImpostos()
 
     orcamento = Orcamento()
     orcamento.adiciona_item(Item('ITEM 1', 50))
