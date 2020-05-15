@@ -4,11 +4,12 @@ from datetime import date
 class NotaFiscal(object):
     def __init__(
             self,
-            razao_social,
-            cnpj,
-            itens,
-            data_de_emissao=date.today(),
-            detalhes=''):
+            razao_social: str,
+            cnpj: str,
+            itens: int,
+            data_de_emissao: date = date.today(),
+            detalhes: str = ''
+    ) -> None:
         self.__razao_social = razao_social
         self.__cnpj = cnpj
         self.__data_de_emissao = data_de_emissao
@@ -20,17 +21,17 @@ class NotaFiscal(object):
         self.__itens = itens
 
     @property
-    def razao_social(self):
+    def razao_social(self) -> str:
         return self.__razao_social
 
     @property
-    def cnpj(self):
+    def cnpj(self) -> str:
         return self.__cnpj
 
     @property
-    def data_de_emissao(self):
+    def data_de_emissao(self) -> date:
         return self.__data_de_emissao
 
     @property
-    def detalhes(self):
+    def detalhes(self) -> str:
         return self.__detalhes

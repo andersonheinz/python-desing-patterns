@@ -4,17 +4,16 @@ Comportamentos compostos por outras classes da mesma hierarquia.
 
 """
 
-from Item import Item
-from Orcamento import Orcamento
+from item import Item
+from orcamento import Orcamento
 from abc import ABCMeta, abstractmethod
 
 
 class Imposto(object):
-    def __init__(self, outro_imposto=None):
+    def __init__(self, outro_imposto=None) -> None:
         self.__outro_imposto = outro_imposto
 
     def calculo_do_outro_imposto(self, orcamento):
-
         if self.__outro_imposto is None:
             return 0
         else:

@@ -11,8 +11,8 @@ The Hollywood Principle.
 """
 
 from abc import ABCMeta, abstractmethod
-from Item import Item
-from Orcamento import Orcamento
+from item import Item
+from orcamento import Orcamento
 
 
 class TemplateDeImpostoCondicional(object):

@@ -1,12 +1,12 @@
 class Item(object):
-    def __init__(self, nome, valor):
+    def __init__(self, nome: str, valor: float) -> None:
         self.__nome = nome
         self.__valor = valor
 
     @property
-    def valor(self):
+    def valor(self) -> float:
         return self.__valor
 
     @property
-    def nome(self):
+    def nome(self) -> str:
         return self.__nome

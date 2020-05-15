@@ -9,7 +9,7 @@ transições entre eles.
 """
 
 from abc import ABCMeta, abstractmethod
-from Item import Item
+from item import Item
 
 
 class EstadoDeUmOrcamento(object):

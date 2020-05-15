@@ -7,7 +7,7 @@ podemos implementar o Observer.
 """
 
 from datetime import date
-from Item import Item
+from item import Item
 
 
 def envia_por_email(nota_fiscal):

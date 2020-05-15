@@ -8,8 +8,8 @@ ser validado, caso o anterior não satisfaça a condição.
 
 """
 
-from Item import Item
-from Orcamento import Orcamento
+from item import Item
+from orcamento import Orcamento
 
 
 class DescontoPorCincoItens(object):
